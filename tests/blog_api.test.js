@@ -49,6 +49,31 @@ test('a valid blog can be added', async () => {
 
 })
 
+test('if likes are undefined, it is 0', async () => {
+  const newBlog = {
+    title: 'blog',
+    author: 'writer',
+    url: 'url'
+  }
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+  const response = await api.get('/api/blogs')
+  const result = response.body.find(blog => blog.title === 'blog')
+  expect(result.likes).toBe(0)
+})
+
+test('if title or url is empty, return 400', async () => {
+  const newBlog = {
+    author: 'writer',
+    likes: 1
+  }
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(400)
+})
+
 afterAll(() => {
   mongoose.connection.close()
 })
