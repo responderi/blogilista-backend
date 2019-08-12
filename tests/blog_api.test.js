@@ -83,6 +83,25 @@ test('delete function deletes correct blog', async() => {
   expect(result.body.find(iteratingBlog => iteratingBlog.id === deletedId)).toBe(undefined)
 })
 
+test('updating blog updates every field', async() => {
+  const response = await api.get('/api/blogs')
+  const allBlogs = response.body
+  const updatedId = allBlogs[0].id
+  const newBlog = {
+    'title': 'updatedTitle',
+    'author': 'updatedAuthor',
+    'url': 'updatedUrl',
+    'likes': 100
+  }
+  await api.put('/api/blogs/' + updatedId).send(newBlog)
+  const result = await api.get('/api/blogs')
+  const updatedBlog = result.body.find(blog => blog.id === updatedId)
+  expect(updatedBlog.title).toBe('updatedTitle')
+  expect(updatedBlog.author).toBe('updatedAuthor')
+  expect(updatedBlog.url).toBe('updatedUrl')
+  expect(updatedBlog.likes).toBe(100)
+})
+
 afterAll(() => {
   mongoose.connection.close()
 })
