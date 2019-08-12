@@ -74,6 +74,15 @@ test('if title or url is empty, return 400', async () => {
     .expect(400)
 })
 
+test('delete function deletes correct blog', async() => {
+  const response = await api.get('/api/blogs')
+  const allBlogs = response.body
+  const deletedId = allBlogs[0].id
+  await api.delete('/api/blogs/' + deletedId)
+  const result = await api.get('/api/blogs')
+  expect(result.body.find(iteratingBlog => iteratingBlog.id === deletedId)).toBe(undefined)
+})
+
 afterAll(() => {
   mongoose.connection.close()
 })
