@@ -1,9 +1,9 @@
 post http://localhost:3003/api/blogs 
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RpdHVubnVzIiwiaWQiOiI1ZDg5ZTI2NTUwMjA3NjEzMzRjM2ZhZDgiLCJpYXQiOjE1NjkzMTgyNDd9.wpDqfp9F83xqgDd7u8gKDpW6_iI_S_A4AssgDRVTGMw
 
 {
-  "title": "Testi-Otsikko", 
-  "author": "mie", 
-  "url":"liibalaaba", 
+  "title": "Uusi-Otsikko", 
+  "url":"liibalaabas",
   "likes": 0 
 }
