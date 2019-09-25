@@ -1,9 +1,10 @@
 post http://localhost:3003/api/blogs 
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RpdHVubnVzIiwiaWQiOiI1ZDg5ZTI2NTUwMjA3NjEzMzRjM2ZhZDgiLCJpYXQiOjE1NjkzMTgyNDd9.wpDqfp9F83xqgDd7u8gKDpW6_iI_S_A4AssgDRVTGMw
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RpdHVubnVzIiwiaWQiOiI1ZDhiNTkyODk5NWM2MzIzNzAwMGI3MmMiLCJpYXQiOjE1Njk0MTM0MjF9.rAfAaK9jd9pcqMA7Kq_KXWfSNVp479KeFVGoXkG8cN8
 
 {
   "title": "Uusi-Otsikko", 
+  "author": "Batman",
   "url":"liibalaabas",
   "likes": 0 
 }

@@ -3,5 +3,5 @@ Content-Type: application/json
 
 {
   "username": "testitunnus", 
-  "password":"testisalasana" 
+  "password":"abc" 
 }

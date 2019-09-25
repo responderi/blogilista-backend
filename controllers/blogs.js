@@ -12,12 +12,12 @@ const getTokenFrom = request => {
 }
 
 blogsRouter.get('/', async (request, response) => {
-  const blogs = await Blog.find({}).populate('author')
+  const blogs = await Blog.find({}).populate('user', { username: 1, name: 1 })
   response.json(blogs.map(blog => blog.toJSON()))
 })
 
 blogsRouter.post('/', async (request, response, next) => {
-  const body = request.body
+  const blog = new Blog(request.body)
   const token = getTokenFrom(request)
   try {
     const decodedToken = jwt.verify(token, process.env.SECRET)
@@ -27,12 +27,7 @@ blogsRouter.post('/', async (request, response, next) => {
 
     const user = await User.findById(decodedToken.id)
 
-    const blog = new Blog({
-      title: body.title,
-      url: body.url,
-      likes: body.likes,
-      author: user._id
-    })
+    blog.user = user.id
 
     if (blog.likes === undefined) {
       blog.likes = 0
@@ -42,7 +37,7 @@ blogsRouter.post('/', async (request, response, next) => {
       return response.sendStatus(400).end()
     }
     const savedBlog = await blog.save()
-    user.blogs = user.blogs.concat(savedBlog._id)
+    user.blogs = user.blogs.concat(blog)
     await user.save()
     response.json(savedBlog.toJSON()) 
   } catch(exception) {
